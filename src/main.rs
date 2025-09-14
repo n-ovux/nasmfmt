@@ -22,7 +22,8 @@ fn main() {
     asm_formatter.fix_spacing();
     asm_formatter.fix_whitespace();
     asm_formatter.fix_indenting();
-    let new_text = asm_formatter.output();
+    asm_formatter.print();
 
-    fs::write(file, new_text.as_bytes()).unwrap();
+    // let new_text = asm_formatter.output();
+    // fs::write(file, new_text.as_bytes()).unwrap();
 }
