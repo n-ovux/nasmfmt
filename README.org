@@ -1,0 +1,15 @@
+#+title: Nasmfmt
+
+A code formatter for nasm assembly files
+
+* Building
+#+begin_src shell
+$ cargo build --release
+#+end_src
+The compiled binary will then be in the target folder.
+
+* Usage
+#+begin_src shell
+$ nasmfmt FILENAME
+#+end_src
+This will then read in the FILENAME and print out the formatted file to stdout.
