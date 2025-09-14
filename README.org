@@ -1,4 +1,5 @@
 #+title: Nasmfmt
+#+options: ^:nil
 
 A code formatter for nasm assembly files
 
@@ -9,7 +10,16 @@ $ cargo build --release
 The compiled binary will then be in the target folder.
 
 * Usage
+The following will read FILENAME and print the formatted file to stdout.
 #+begin_src shell
 $ nasmfmt FILENAME
 #+end_src
-This will then read in the FILENAME and print out the formatted file to stdout.
+To see debug information, set the environment variable RUST_LOG to info.
+#+begin_src shell
+$ RUST_LOG=info nasmfmt FILENAME
+#+end_src
+
+* Features
+- Removes excess new lines
+- Fixes operand whitespace
+- Fixes indentation
