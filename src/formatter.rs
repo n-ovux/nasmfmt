@@ -15,7 +15,7 @@ impl Formatter {
         }
     }
 
-    pub fn output(self) -> String {
+    pub fn get_text(self) -> String {
         self.text
     }
 

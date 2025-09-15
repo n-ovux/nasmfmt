@@ -16,14 +16,10 @@ fn main() {
     let file = args.get(1).unwrap();
 
     let asm_text = fs::read_to_string(file).unwrap();
-    fs::write(format!("{}.old~", file), asm_text.as_bytes()).unwrap();
     let mut asm_formatter = Formatter::new(asm_text);
     asm_formatter.remove_double_lines();
     asm_formatter.fix_spacing();
     asm_formatter.fix_whitespace();
     asm_formatter.fix_indenting();
     asm_formatter.print();
-
-    // let new_text = asm_formatter.output();
-    // fs::write(file, new_text.as_bytes()).unwrap();
 }
