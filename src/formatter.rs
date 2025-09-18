@@ -35,7 +35,7 @@ impl Formatter {
     pub fn fix_spacing(&mut self) {
         log::info!("Fixing labels");
         let mut lines: Vec<String> = self.text.lines().map(|x| String::from(x)).collect();
-        let is_spot = Regex::new(r#"(^[^"(;;)]*:)"#).unwrap();
+        let is_spot = Regex::new(r#"(^[^"(;;)]*:)|(^[^"(//)]*:)"#).unwrap();
         for line in lines.iter_mut() {
             if let Some(position) = is_spot.shortest_match(line) {
                 line.insert(position, ' ');
@@ -47,7 +47,7 @@ impl Formatter {
     pub fn fix_indenting(&mut self) {
         log::info!("Fixing indentation");
         let mut lines: Vec<String> = self.text.lines().map(|x| String::from(x)).collect();
-        let dont_indent = Regex::new(r#"(^[^"(;;)]*:)|(^[\s]*$)"#).unwrap();
+        let dont_indent = Regex::new(r#"(^[^"(;;)]*:)|(^[^"(//)]*:)|(^[\s]*$)"#).unwrap();
         for line in lines.iter_mut() {
             *line = line.trim().to_string();
             if !dont_indent.is_match(line) {
@@ -61,9 +61,9 @@ impl Formatter {
         log::info!("Fixing whitespace");
         let mut lines: Vec<String> = self.text.lines().map(|x| String::from(x)).collect();
         let words = Regex::new(r#""[^"]*",?|\s?[^\s]+\s?"#).unwrap();
-        let is_command = Regex::new(r#"^\s*;;"#).unwrap();
+        let is_comment = Regex::new(r#"(^\s*;;)|(^\s*//)"#).unwrap();
         for line in lines.iter_mut() {
-            if is_command.is_match(line) {
+            if is_comment.is_match(line) {
                 continue;
             }
             let mut new_line: String = String::new();

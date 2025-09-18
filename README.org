@@ -1,7 +1,7 @@
 #+title: Nasmfmt
 #+options: ^:nil
 
-A code formatter for nasm assembly files
+A code formatter for nasm (and GNU as) assembly files
 
 ** Building
 #+begin_src shell
